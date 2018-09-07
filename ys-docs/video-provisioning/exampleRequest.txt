@@ -1,0 +1,323 @@
+Carl DC: Voorbeeldje van Yelo customer provisioning SOAP request/response in attach... De YELO_DTR_SERVICE nodetree kan/mag je zelfs omitten, daar doen we niks mee. Deze klant heeft ook meerdere content packages, als je enkel base package wil, da’s die met BSS_PACKAGE_ID==486 dacht ik...
+
+
+POST /yelo-provisioning-service/ws/ProvisioningService/ProvisioningService HTTP/1.0
+Content-Type: text/xml; charset=utf-8
+Accept: application/soap+xml, application/dime, multipart/related, text/*
+User-Agent: Axis/1.4
+Host: provision.yelo.prd.inet.telenet.be:8151
+Cache-Control: no-cache
+Pragma: no-cache
+SOAPAction: ""
+Content-Length: 8032
+X-Forwarded-For: 10.4.0.123
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soapenv:Body>
+		<ProvisionRequest xmlns="http://yelotv.be/ns/model/services/provisioning/ProvisioningServiceMessages">
+			<ns1:ProvisioningActions xmlns:ns1="http://yelotv.be/ns/model/services/provisioning/ProvisioningService">
+				<ns1:Provision ref="e3fdc38c-eb9a-4af1-a6d3-7f167f3ef2ff">
+					<ns1:Nodes>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba32-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:NodeType>YELO_SERVICE</ns1:NodeType>
+							<ns1:Status>
+								<ns1:Code>IN_USE</ns1:Code>
+							</ns1:Status>
+							<ns1:Properties>
+								<ns1:Property name="CUSTOMER_NUMBER">
+									<ns1:Value>557442125</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="MODEM_MAC_ADDRESSES">
+									<ns1:Values>
+										<ns1:Value>38:43:7D:08:4D:F5</ns1:Value>
+									</ns1:Values>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba33-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba32-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_DTV_LINE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BUSINESS_IDENTIFIER">
+									<ns1:Value>DTV139048</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="INSTALL_ADDRESS_ZIPCODE">
+									<ns1:Value>3020</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="HOUSEHOLD_IDENTIFIER">
+									<ns1:Value>117253</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba34-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba32-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_STREAMING_SERVICE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="ALLOW_FVOD">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_TVOD">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_FVOD">
+									<ns1:Value>1</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_TVOD">
+									<ns1:Value>1</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba35-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba34-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_CONTENT_PACKAGE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BSS_PACKAGE_ID">
+									<ns1:Value>966</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_PACKAGE">
+									<ns1:Value>2</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_LINEAR">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_SWIPE">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_RECORDINGS">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="REQUIRE_DEVICE_AUTHORIZATION">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba38-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba34-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_CONTENT_PACKAGE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BSS_PACKAGE_ID">
+									<ns1:Value>486</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_PACKAGE">
+									<ns1:Value>5</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_LINEAR">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_REPLAY">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_SWIPE">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_RECORDINGS">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba3a-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba34-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_CONTENT_PACKAGE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BSS_PACKAGE_ID">
+									<ns1:Value>56941</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_PACKAGE">
+									<ns1:Value>2</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_SVOD">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_LINEAR">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_REPLAY">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_SWIPE">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_RECORDINGS">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="REQUIRE_DEVICE_AUTHORIZATION">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">82225a21-5fa4-4963-9500-47f0ae31ac23</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba34-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_CONTENT_PACKAGE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BSS_PACKAGE_ID">
+									<ns1:Value>491</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_PACKAGE">
+									<ns1:Value>2</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_SVOD">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_LINEAR">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_REPLAY">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_SWIPE">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_RECORDINGS">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="REQUIRE_DEVICE_AUTHORIZATION">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba36-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba32-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_DTR_SERVICE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="ALLOW_FVOD">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_TVOD">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba37-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba36-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_CONTENT_PACKAGE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BSS_PACKAGE_ID">
+									<ns1:Value>966</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_PACKAGE">
+									<ns1:Value>2</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="REQUIRE_DEVICE_AUTHORIZATION">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba39-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba36-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_CONTENT_PACKAGE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BSS_PACKAGE_ID">
+									<ns1:Value>486</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_REPLAY">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">19acabad-ba3b-3ad4-e054-00144f80ac4e</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba36-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_CONTENT_PACKAGE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BSS_PACKAGE_ID">
+									<ns1:Value>56941</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_PACKAGE">
+									<ns1:Value>2</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_SVOD">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_REPLAY">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="ALLOW_RECORDINGS">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="REQUIRE_DEVICE_AUTHORIZATION">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+						<ns1:Node>
+							<ns1:NodeId system="OSS">c8a604ea-17e9-436f-a43f-3b7392e10920</ns1:NodeId>
+							<ns1:ParentNodeId system="OSS">19acabad-ba36-3ad4-e054-00144f80ac4e</ns1:ParentNodeId>
+							<ns1:NodeType>YELO_CONTENT_PACKAGE</ns1:NodeType>
+							<ns1:Properties>
+								<ns1:Property name="BSS_PACKAGE_ID">
+									<ns1:Value>491</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="CONCURRENT_STREAMS_PACKAGE">
+									<ns1:Value>2</ns1:Value>
+								</ns1:Property>
+								<ns1:Property name="REQUIRE_DEVICE_AUTHORIZATION">
+									<ns1:Value>true</ns1:Value>
+								</ns1:Property>
+							</ns1:Properties>
+						</ns1:Node>
+					</ns1:Nodes>
+				</ns1:Provision>
+			</ns1:ProvisioningActions>
+		</ProvisionRequest>
+	</soapenv:Body>
+</soapenv:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml;charset=UTF-8
+Content-Length: 2658
+Date: Mon, 26 Mar 2018 08:09:50 GMT
+Connection: close
+Server: Telenet
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns2:ProvisionResponse xmlns="http://yelotv.be/ns/model/services/provisioning/ProvisioningService" xmlns:ns2="http://yelotv.be/ns/model/services/provisioning/ProvisioningServiceMessages" xmlns:ns3="http://yelotv.be/ns/model/services/common/ModuleOAMServiceMessages" xmlns:ns4="http://yelotv.be/ns/model/entities/operational/OAMOperations" xmlns:ns5="http://yelotv.be/ns/model/entities/common/Result" xmlns:ns6="http://yelotv.be/ns/model/entities/operational/ModuleStatistics" xmlns:ns7="http://yelotv.be/ns/model/entities/operational/ExecutionContext" xmlns:ns8="http://yelotv.be/ns/model/entities/common/Identifier" xmlns:ns9="http://yelotv.be/ns/model/entities/common/Types">
+			<ProvisioningResults>
+				<Code>OK</Code>
+				<Message>Actions executed successfully</Message>
+				<ActionResults>
+					<ActionResult ref="e3fdc38c-eb9a-4af1-a6d3-7f167f3ef2ff">
+						<Code>PROVISIONED</Code>
+						<NodeIds>
+							<NodeId system="YELO">2f9fcb91-2ef1-487e-be60-60f9e69dc342</NodeId>
+							<NodeId system="OSS">19acabad-ba32-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="OSS">19acabad-ba34-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="YELO">fcd6546b-98e6-4f79-b9fe-9d11e80ab0d8</NodeId>
+							<NodeId system="OSS">19acabad-ba35-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="YELO">e3b8c2e4-7df7-43e9-bdfe-c2b0a6b3a73d</NodeId>
+							<NodeId system="OSS">19acabad-ba38-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="YELO">51b42ab7-fac9-436b-8f3f-7cc1247c32e9</NodeId>
+							<NodeId system="YELO">4fd5e0c4-e6e8-482b-b235-ad5503706c75</NodeId>
+							<NodeId system="OSS">19acabad-ba3a-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="YELO">c18e03a2-8211-43c9-81c6-9680cb0d50a9</NodeId>
+							<NodeId system="OSS">82225a21-5fa4-4963-9500-47f0ae31ac23</NodeId>
+							<NodeId system="OSS">19acabad-ba33-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="YELO">48012f43-ecc5-4555-b7bd-b5acc5cbabd2</NodeId>
+							<NodeId system="YELO">04a3f4ac-7580-4557-8e82-24e90e8857d1</NodeId>
+							<NodeId system="OSS">19acabad-ba36-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="OSS">19acabad-ba37-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="YELO">89c54ecd-a25a-4779-8db0-f583c9f0b2ef</NodeId>
+							<NodeId system="YELO">34ebdabd-28f1-4d16-b347-3d0a52d6abc8</NodeId>
+							<NodeId system="OSS">c8a604ea-17e9-436f-a43f-3b7392e10920</NodeId>
+							<NodeId system="OSS">19acabad-ba3b-3ad4-e054-00144f80ac4e</NodeId>
+							<NodeId system="YELO">0c788c49-c93c-465f-b681-f97600ac8933</NodeId>
+							<NodeId system="YELO">9110a1c3-680f-43d4-a7a8-255502bdce82</NodeId>
+							<NodeId system="OSS">19acabad-ba39-3ad4-e054-00144f80ac4e</NodeId>
+						</NodeIds>
+					</ActionResult>
+				</ActionResults>
+			</ProvisioningResults>
+		</ns2:ProvisionResponse>
+	</soap:Body>
+</soap:Envelope>

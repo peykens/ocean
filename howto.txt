@@ -10,6 +10,7 @@ cd ys-miro-workflow
 DOCKER START-UP
 ---------------
 1. Start DB
+    docker-compose -f ../docker-compose-db.yaml up
 
 2. Start services
     docker-composse up -d

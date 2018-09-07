@@ -1,0 +1,4 @@
+All containers (incl stopped): docker ps -a
+Copy data from container to local host: docker cp servicebot-deploy_db_1:/var/lib/postgresql/data ./db-data
+Inspect volume: docker volume inspect servicebot-deploy_db-data
+Remove all stopped containers: docker ps -aq --no-trunc -f status=exited | xargs docker rm

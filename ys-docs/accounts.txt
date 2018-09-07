@@ -1,0 +1,3 @@
+gmail (admin): yellow.submarine.ocean@gmail.com / submarine001
+servicebot (admin user): yellow.submarine.ocean@gmail.com / submarine001
+stripe: yellow.submarine.ocean@gmail.com / submarine001!
