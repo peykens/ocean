@@ -18,8 +18,8 @@ services:
       SMTP_PORT : '587'
       PORT : "3000"
     volumes:
-      - ./ys-service-bot-data/upload-data:/usr/src/app/uploads
-      - ./ys-service-bot-data/environment-file:/usr/src/app/env
+      - ./ys-servicebot-data/upload-data:/usr/src/app/uploads
+      - ./ys-servicebot-data/environment-file:/usr/src/app/env
 #      - /path/to/ssl/certs/on/server:/usr/src/app/ssl
     links:
       - db
@@ -34,7 +34,7 @@ services:
       POSTGRES_PASSWORD : "secret_doggo"
       POSTGRES_DB : "sb_db"
     volumes:
-      - ./ys-service-bot-data/db-data:/var/lib/postgresql/data
+      - ./ys-servicebot-data/db-data:/var/lib/postgresql/data
     expose:
       - "5432"
 volumes:
