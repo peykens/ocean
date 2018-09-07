@@ -8,7 +8,7 @@ const envalid = require('envalid')
 const { str, host, port } = envalid
 
 const env = envalid.cleanEnv(process.env, {
-    BROKER_HOST: host(),
+    BROKER_HOST: str(),
     BROKER_QUEUE_INPUT: str(),
     HTTP_PORT: port(),
     HTTP_CORS: str()

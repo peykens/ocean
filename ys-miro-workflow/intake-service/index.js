@@ -10,8 +10,8 @@ const envalid = require('envalid')
 const { str, host } = envalid
 
 const env = envalid.cleanEnv(process.env, {
-    BROKER_HOST:            host(),
-    BROKER_QUEUE_INPUT:        str(),
+    BROKER_HOST:            str(),
+    BROKER_QUEUE_INPUT:     str(),
     BROKER_QUEUE_EXCHANGE:  str()
 });
 

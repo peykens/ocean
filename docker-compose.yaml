@@ -1,0 +1,44 @@
+#Explanation:
+#SMTP_ settings should be uncommented and configured if you want to have servicebot send emails
+version: '2'
+services:
+  intake-endpoint:
+    image: ysm_intake_endpoint:v0.1
+    container_name: ysm_intake-endpoint
+    environment:
+      BROKER_HOST: ysm_broker
+      BROKER_QUEUE_INPUT: "miro.workflow.ys.input"
+      HTTP_PORT: "8081"
+      HTTP_CORS: "*"
+      DEBUG: "*"
+    ports:
+      - "8081:8081"
+    networks:
+      - ysm
+    depends_on:
+      - ysm_broker
+  intake-service:
+    image: ysm_intake_service:v0.1
+    container_name: ysm_intake-service
+    environment:
+      BROKER_HOST: ysm_broker
+      BROKER_QUEUE_INPUT: "miro.workflow.ys.input"
+      BROKER_QUEUE_EXCHANGE: "miro.workflow.ys.exchange"
+      DEBUG: "*"
+    networks:
+      - ysm
+    depends_on:
+      - ysm_broker
+  ysm_broker:
+    image: rabbitmq:3-management
+    container_name: ysm_broker
+    ports:
+      - "5672:5672"
+      - "8080:15672"
+    networks:
+      - ysm
+
+networks:
+  ysm:
+    driver: bridge
+      
