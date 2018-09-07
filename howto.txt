@@ -1,0 +1,20 @@
+DOCKER BUILD of version v1.0
+------------
+
+cd ys-miro-workflow
+    docker build -f Dockerfile_intake_endpoint --no-cache --rm  -t ysm_intake_endpoint:v0.1 .
+    docker build -f Dockerfile_intake_service --no-cache --rm  -t ysm_intake_service:v0.1 .
+
+--> Now you have in your local docker repo two new images ready
+
+DOCKER START-UP
+---------------
+1. Start DB
+
+2. Start services
+    docker-composse up -d
+
+    --> this will start rabbit, intake-endpoint and intake-service
+    NOTE : I should update startup script from rabbit. At first startup the container will be ready, but the service in the container not yet. So you migth need to repeat the startup script
+
+
