@@ -40,11 +40,9 @@ function handleIncomingMessage(obj){
             debug(`Workflow [${obj.workflow.name}] is not known in config`);
             reject('Workflow is not known');
         }
-        //  Append workflow step(s)
-        debug(`Append workflow tasks`,obj.id);
-        obj.workflow.tasks = workflowConfig[obj.workflow.name].tasks;
         //  Sanitize the data
-        obj.output = {}
+        obj.workflow.execution = obj.workflow.name;
+        obj.data = {}
         //  Publish on exchange queue
         debug(`Publish for execution to exchange queue ${env.BROKER_QUEUE_EXCHANGE}`,obj.id);
         broker.send(env.BROKER_QUEUE_EXCHANGE,obj);

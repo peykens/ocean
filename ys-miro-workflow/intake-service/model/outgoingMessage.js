@@ -1,18 +1,9 @@
 module.exports = {
     id: '<?string>',
     input: { },
-    output: {},
+    data: {},
     workflow: {
         name: '<!workflowname>',
-        tasks: [
-            {
-                name: '<name>',
-                type: '<type>'
-            },
-            {
-                name: '<name>',
-                type: '<type>'
-            }
-        ]
+        execution: '<!workfloname>'
     }
 };
