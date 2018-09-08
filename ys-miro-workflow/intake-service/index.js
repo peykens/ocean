@@ -7,7 +7,7 @@ const rabbitBuilder = require('./service/rabbitMQService');
 const uuidv4 = require('uuid/v4');
 
 const envalid = require('envalid')
-const { str, host } = envalid
+const { str } = envalid
 
 const env = envalid.cleanEnv(process.env, {
     BROKER_HOST:            str(),
