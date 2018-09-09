@@ -46,3 +46,6 @@ ServiceBot open points
 - Webhook integration with intake-endpoint
 - Downstream notification user credentials changed
 - How to disable test-mode?
+
+Questions
+- How to make sure no messages get lost (eg consumer is not running thus not listening on exchange, this could lead to lost tasks)

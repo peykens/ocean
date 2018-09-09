@@ -3,7 +3,7 @@
 version: '2'
 services:
   intake-endpoint:
-    image: ysm_intake_endpoint:v0.1
+    image: ysm_intake_endpoint:v0.2
     container_name: ysm_intake-endpoint
     environment:
       BROKER_HOST: ysm_broker
@@ -19,7 +19,7 @@ services:
     depends_on:
       - ysm_broker
   intake-service:
-    image: ysm_intake_service:v0.1
+    image: ysm_intake_service:v0.2
     container_name: ysm_intake-service
     environment:
       BROKER_HOST: ysm_broker
