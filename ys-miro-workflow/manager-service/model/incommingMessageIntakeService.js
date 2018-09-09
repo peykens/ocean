@@ -1,6 +1,9 @@
 module.exports = {
+    id: '<?string>',
     input: { },
+    data: {},
     workflow: {
-        name: 'workflow1'
+        name: '<!workflowname>',
+        execution: '<!workfloname>'
     }
 };

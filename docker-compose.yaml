@@ -25,7 +25,7 @@ services:
       BROKER_HOST: ysm_broker
       BROKER_EXCHANGE: "ys.workflow"
       BROKER_TOPIC_INPUT: "ys.workflow.input.*"
-      BROKER_TOPIC_MANAGER: "ys.workflow.manager"
+      BROKER_TOPIC_MANAGER: "ys.workflow.manager.new"
       DEBUG: "*"
     networks:
       - ysm
