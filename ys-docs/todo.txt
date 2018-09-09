@@ -1,12 +1,28 @@
 1. Workflow manager: dispatcher of tasks
 2. Endpoint faker(s): video & mobile provisioning
+    > Sleep 5s and answer with 200 OK
 3. NetworkInventory service: keep track of devices available (SIM), get free device to assign to customer
+    > GetFreeSim
+    > ReserveSIM
+    > ProvisionSIMs
 4. CustomerInventory service: keep track of our customer(s) & all data
+    > GetCustomer
+    > SaveCustomer
 5. AuthenticationService: implementing oAuth / SSO 
+    > How does this work? Will we provision with credentials or does it do callout? (prefer provision)
+    > Candidate?: https://github.com/oauthjs/express-oauth-server
 6. UserInfo service: to retreive data from PostgreSQL servicebot (username with password -> to use for AuthenticationService)
+    > GetUserDetails (returns the credentials used on serviceBot)
 7. Monitoring: listener on bus + ELK stack
 8. Provisoning client(s): listen on bus, send HTTP call to video/mobile endpoint to provisioning
+    > Implement spec(s) from video & mobile services
 9. LogisticService: listen to bus, send b-post a message to ship product to adress
+    > Faker needed!
+    > To investigate design / api ...
+10. DatbaseService: layer on top of the YS datbase (consumed by all other that need a DB)
+    > Find db suitable
+    > API calls for all surounding services
+11. Test suite around all of this
 
 Then we'll see what's next
 
