@@ -1,0 +1,1 @@
+Project used to playaround with rabbitMQ & explore how this works

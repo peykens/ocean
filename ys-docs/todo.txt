@@ -1,3 +1,4 @@
+0. Clean repo: proper naming services, readME files etc
 1. Workflow manager: dispatcher of tasks
 2. Endpoint faker(s): video & mobile provisioning
     > Sleep 5s and answer with 200 OK
@@ -13,6 +14,7 @@
     > Candidate?: https://github.com/oauthjs/express-oauth-server
 6. UserInfo service: to retreive data from PostgreSQL servicebot (username with password -> to use for AuthenticationService)
     > GetUserDetails (returns the credentials used on serviceBot)
+    > Problem: how to we notify downstream IF user credentials changed in servicebot?
 7. Monitoring: listener on bus + ELK stack
 8. Provisoning client(s): listen on bus, send HTTP call to video/mobile endpoint to provisioning
     > Implement spec(s) from video & mobile services
@@ -23,10 +25,20 @@
     > Find db suitable
     > API calls for all surounding services
 11. Test suite around all of this
+12. Proper enviroments
+    > TEST enviroment
+    > PROD enviroment
+    > Connectivity cloud to private
 
 Then we'll see what's next
+- Prometheus?
+- AuditServices?
+- Grafana?
+- Kube?
 
-Prometheus?
-AuditServices?
-Grafana?
-Kube?
+ServiceBot open points
+- EURO ie USD
+! Multi-language not possible
+- Webhook integration with intake-endpoint
+- Downstream notification user credentials changed
+- How to disable test-mode?
