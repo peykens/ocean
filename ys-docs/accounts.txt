@@ -1,3 +1,4 @@
-gmail (admin): yellow.submarine.ocean@gmail.com / submarine001
-servicebot (admin user): yellow.submarine.ocean@gmail.com / submarine001
-stripe: yellow.submarine.ocean@gmail.com / submarine001!
+gmail (admin): yellow.submarine.ocean@gmail.com / xxx
+servicebot (admin user): yellow.submarine.ocean@gmail.com / xxx
+stripe: yellow.submarine.ocean@gmail.com / xxx
+bitbucket: https://bitbucket.org/ys-ocean / xxx
