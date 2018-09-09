@@ -1,4 +1,5 @@
 "use strict";
+//v1.0: Exchange supported
 const debug = require('debug')('rabbitMQService');
 const amqlib = require('amqplib');
 

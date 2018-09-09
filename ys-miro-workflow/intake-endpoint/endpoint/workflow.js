@@ -1,7 +1,8 @@
 const debug = require('debug')('workflowEndpoint');
-function workflowEndpoint(broker,queue){
+function workflowEndpoint(broker,exchange,topic){
     const _broker = broker;
-    const _queue = queue;
+    const _exchange = exchange;
+    const _topic = topic;
     return {
         intake
     };
@@ -15,8 +16,8 @@ function workflowEndpoint(broker,queue){
                 name: workflowName
             }
         };
-        debug('intake', `Publishing on ${_queue}`, inputObj);
-        _broker.send(_queue,inputObj);
+        debug('intake', `Publishing on ${_exchange} on topic ${_topic}`, inputObj);
+        _broker.sentToTopicExchange(_exchange,_topic,inputObj);
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(

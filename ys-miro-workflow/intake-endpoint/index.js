@@ -9,7 +9,8 @@ const { str, host, port } = envalid
 
 const env = envalid.cleanEnv(process.env, {
     BROKER_HOST: str(),
-    BROKER_QUEUE_INPUT: str(),
+    BROKER_EXCHANGE: str(),
+    BROKER_TOPIC_INPUT: str(),
     HTTP_PORT: port(),
     HTTP_CORS: str()
 });
@@ -21,7 +22,8 @@ const helmet = require('helmet');
 
 debug(`Application: ${package.name}`,`Version: ${package.version}`);
 debug(`BROKER_HOST: ${env.BROKER_HOST}`);
-debug(`BROKER_QUEUE_INPUT: ${env.BROKER_QUEUE_INPUT}`);
+debug(`BROKER_EXCHANGE: ${env.BROKER_EXCHANGE}`);
+debug(`BROKER_TOPIC: ${env.BROKER_TOPIC_INPUT}`);
 debug(`HTTP_PORT: ${env.HTTP_PORT}`);
 debug(`HTTP_CORS: ${env.HTTP_CORS}`);
 
@@ -31,7 +33,7 @@ const broker = new rabbitBuilder(env.BROKER_HOST);
 debug(`Initialize HTTP server`);
 const webApp = new express();
 const handlerRoot = require('./endpoint/root')();
-const handlerWorkflow = require('./endpoint/workflow')(broker,env.BROKER_QUEUE_INPUT);
+const handlerWorkflow = require('./endpoint/workflow')(broker,env.BROKER_EXCHANGE,env.BROKER_TOPIC_INPUT);
 
 webApp.use(helmet());
 webApp.use(cors({origin: env.HTTP_PORT}));

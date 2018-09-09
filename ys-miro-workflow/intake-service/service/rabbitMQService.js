@@ -1,6 +1,9 @@
 "use strict";
+//v1.0: Exchange supported
 const debug = require('debug')('rabbitMQService');
 const amqlib = require('amqplib');
+
+const EXCHANGE_TYPE_TOPIC = 'topic';
 
 class rabbitMQService{
     constructor(host){
@@ -36,21 +39,21 @@ class rabbitMQService{
         return this._rabbitMQConnection.close();
     }
 
-    async listen(queue,callback){
+    async listenOnQueue(queue,callback){
         if (!this._rabbitMQConnected){ await this.open();}
-        debug('listen',queue,'creating channel');
+        debug('listenOnQueue',queue,'creating channel');
         const channel = await this._rabbitMQConnection.createChannel();
-        debug('listen',queue,'asserting to queue');
+        debug('listenOnQueue',queue,'asserting to queue');
         await channel.assertQueue(queue);
-        debug('listen',queue,'start listening');
+        debug('listenOnQueue',queue,'start listening');
         channel.consume(queue,(msg)=> {
             if (msg !== null){
-                debug('listen',queue,'handle message','invoking callback');
+                debug('listenOnQueue',queue,'handle message','invoking callback');
                 callback(JSON.parse(msg.content.toString())).then((rsp) => {
-                    debug('listen',queue,'handle message','processed succesfully, acknowledging message on broker');
+                    debug('listenOnQueue',queue,'handle message','processed succesfully, acknowledging message on broker');
                     channel.ack(msg);
                 }).catch((ex)=>{
-                    debug('listen',queue,'handle message','error returned from callback, acknowledging message on broker',ex);
+                    debug('listenOnQueue',queue,'handle message','error returned from callback, acknowledging message on broker',ex);
                     //channel.nack(msg); 
                     channel.ack(msg);
                 });
@@ -60,14 +63,54 @@ class rabbitMQService{
         return;
     }
 
-    async send(queue,obj){
+    async listenOnExchange(exchange,topics,callback){
+        if (!Array.isArray(topics)) { topics = [topics]; }
         if (!this._rabbitMQConnected){ await this.open();}
-        debug('send',queue,'creating channel');
+        debug('listenOnExchange',exchange,'creating channel');
         const channel = await this._rabbitMQConnection.createChannel();
-        debug('send',queue,'asserting to queue');
+        debug('listenOnExchange',exchange,'asserting to exchange');
+        await channel.assertExchange(exchange,EXCHANGE_TYPE_TOPIC, {durable: false});
+        debug('listenOnExchange','create queue');
+        const queue = await channel.assertQueue('',{exclusive: true});
+        debug('listenOnExchange','Queue created', queue.queue);
+        await topics.forEach((t) => {
+            debug('listenOnExchange',`Bind queue ${queue} to exchange ${exchange} and register topic ${t}`);
+            channel.bindQueue(queue.queue,exchange,t);
+        });
+        debug('listenOnExchange',queue.queue,'start listening on queue');
+        channel.consume(queue.queue,(msg)=> {
+            if (msg !== null){
+                debug('listenOnExchange',queue.queue,'handle message',msg.fields.exchange ,msg.fields.routingKey,'invoking callback');
+                callback(JSON.parse(msg.content.toString()),msg.fields.exchange ,msg.fields.routingKey).then((rsp) => {
+                    debug('listenOnExchange',queue,'handle message','processed succesfully');
+                }).catch((ex)=>{
+                    debug('listenOnExchange',queue,'handle message','error returned from callback',ex);
+                });
+            }
+        }, {noAck: true});
+        return;
+    }
+
+    async sendToQueue(queue,obj){
+        if (!this._rabbitMQConnected){ await this.open();}
+        debug('sendToQueue','creating channel');
+        const channel = await this._rabbitMQConnection.createChannel();
+        debug('sendToQueue',queue,'asserting to queue');
         await channel.assertQueue(queue);
-        debug('send',queue,'sending message', obj);
+        debug('sendToQueue',queue,'sending message', obj);
         await channel.sendToQueue(queue,Buffer.from(JSON.stringify(obj)));
+        return;
+    }
+
+
+    async sentToTopicExchange(exchange,topic,obj){
+        if (!this._rabbitMQConnected){ await this.open();}
+        debug('sentToTopicExchange','creating channel');
+        const channel = await this._rabbitMQConnection.createChannel();
+        debug('sentToTopicExchange',exchange,'asserting to exchange');
+        await channel.assertExchange(exchange,EXCHANGE_TYPE_TOPIC, {durable: false});
+        debug('sentToTopicExchange',exchange,'publish message on topic', topic, obj);
+        await channel.publish(exchange,topic,Buffer.from(JSON.stringify(obj)));
         return;
     }
 

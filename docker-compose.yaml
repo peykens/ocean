@@ -7,7 +7,8 @@ services:
     container_name: ysm_intake-endpoint
     environment:
       BROKER_HOST: ysm_broker
-      BROKER_QUEUE_INPUT: "miro.workflow.ys.input"
+      BROKER_EXCHANGE: "ys.workflow"
+      BROKER_TOPIC_INPUT: "ys.workflow.input.http"
       HTTP_PORT: "8081"
       HTTP_CORS: "*"
       DEBUG: "*"
@@ -22,8 +23,9 @@ services:
     container_name: ysm_intake-service
     environment:
       BROKER_HOST: ysm_broker
-      BROKER_QUEUE_INPUT: "miro.workflow.ys.input"
-      BROKER_QUEUE_EXCHANGE: "miro.workflow.ys.exchange"
+      BROKER_EXCHANGE: "ys.workflow"
+      BROKER_TOPIC_INPUT: "ys.workflow.input.*"
+      BROKER_TOPIC_MANAGER: "ys.workflow.manager"
       DEBUG: "*"
     networks:
       - ysm

@@ -11,26 +11,31 @@ const { str } = envalid
 
 const env = envalid.cleanEnv(process.env, {
     BROKER_HOST:            str(),
-    BROKER_QUEUE_INPUT:     str(),
-    BROKER_QUEUE_EXCHANGE:  str()
+    BROKER_EXCHANGE:     str(),
+    BROKER_TOPIC_INPUT:  str(),
+    BROKER_TOPIC_MANAGER: str()
 });
 
 const workflowConfig = require('./config/workflow');
 
 debug(`Application: ${package.name}`,`Version: ${package.version}`);
 debug(`BROKER_HOST: ${env.BROKER_HOST}`);
-debug(`BROKER_QUEUE_INPUT: ${env.BROKER_QUEUE_INPUT}`);
-debug(`BROKER_QUEUE_EXCHANGE: ${env.BROKER_QUEUE_EXCHANGE}`);
+debug(`BROKER_EXCHANGE: ${env.BROKER_EXCHANGE}`);
+debug(`BROKER_TOPIC_INPUT: ${env.BROKER_TOPIC_INPUT}`);
+debug(`BROKER_TOPIC_MANAGER: ${env.BROKER_TOPIC_MANAGER}`);
 
 debug(`Initialize rabbit connection`);
 const broker = new rabbitBuilder(env.BROKER_HOST);
-debug(`Start listening on input queue ${env.BROKER_QUEUE_INPUT}`);
+debug(`Start listening on exchange ${env.BROKER_EXCHANGE} topic ${env.BROKER_TOPIC_INPUT}`);
+
+broker.listenOnExchange(env.BROKER_EXCHANGE,env.BROKER_TOPIC_INPUT,handleIncomingMessage);
+
 broker.listen(env.BROKER_QUEUE_INPUT,handleIncomingMessage);
 
-function handleIncomingMessage(obj){
+function handleIncomingMessage(obj,exchange,topic){
     return new Promise((resolve,reject)=>{
         //Handle incoming message
-        debug(`Handle incoming message`);
+        debug(`Handle incoming message on exchange ${exchange} and topic ${topic}`);
         //  Is message valid
         if (!isMessageValid(obj)){ reject('Invallid message structure'); }
         if (!obj.id){ obj.id = uuidv4(); }
@@ -44,8 +49,8 @@ function handleIncomingMessage(obj){
         obj.workflow.execution = obj.workflow.name;
         obj.data = {}
         //  Publish on exchange queue
-        debug(`Publish for execution to exchange queue ${env.BROKER_QUEUE_EXCHANGE}`,obj.id);
-        broker.send(env.BROKER_QUEUE_EXCHANGE,obj);
+        debug(`Publish for execution to exchange ${env.BROKER_EXCHANGE} on topic ${env.BROKER_TOPIC_MANAGER}`,obj.id);
+        broker.sentToTopicExchange(env.BROKER_EXCHANGE,env.BROKER_TOPIC_MANAGER,obj);
     });
 }
 
