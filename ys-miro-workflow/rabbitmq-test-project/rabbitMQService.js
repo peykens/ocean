@@ -65,21 +65,21 @@ class rabbitMQService{
     async listenOnExchange(exchange,topics,callback){
         if (!Array.isArray(topics)) { topics = [topics]; }
         if (!this._rabbitMQConnected){ await this.open();}
-        debug('listenOnExchange',queue,'creating channel');
+        debug('listenOnExchange',exchange,'creating channel');
         const channel = await this._rabbitMQConnection.createChannel();
-        debug('listenOnExchange',queue,'asserting to exchange');
+        debug('listenOnExchange',exchange,'asserting to exchange');
         await channel.assertExchange(exchange,EXCHANGE_TYPE_TOPIC, {durable: false});
         debug('listenOnExchange','create queue');
         const queue = await channel.assertQueue('',{exclusive: true});
         debug('listenOnExchange','Queue created', queue.queue);
-        topics.forEach((t) => {
+        await topics.forEach((t) => {
             debug('listenOnExchange',`Bind queue ${queue} to exchange ${exchange} and register topic ${t}`);
-            await channel.bindQueue(queue.queue,exchange,t);
+            channel.bindQueue(queue.queue,exchange,t);
         });
-        debug('listenOnExchange',queue,'start listening on queue');
-        channel.consume(queue,(msg)=> {
+        debug('listenOnExchange',queue.queue,'start listening on queue');
+        channel.consume(queue.queue,(msg)=> {
             if (msg !== null){
-                debug('listenOnExchange',queue,'handle message',msg.fields.exchange ,msg.fields.routingKey,'invoking callback');
+                debug('listenOnExchange',queue.queue,'handle message',msg.fields.exchange ,msg.fields.routingKey,'invoking callback');
                 callback(JSON.parse(msg.content.toString()),msg.fields.exchange ,msg.fields.routingKey).then((rsp) => {
                     debug('listenOnExchange',queue,'handle message','processed succesfully');
                 }).catch((ex)=>{

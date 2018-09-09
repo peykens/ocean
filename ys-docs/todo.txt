@@ -1,4 +1,8 @@
 0. Clean repo: proper naming services, readME files etc
+    > Proper naming (remove things like miro)
+    > Add readme files
+    > Split in different repo's per service
+    > Create utils repo, for example rabbitMQService is duplicated now per service
 1. Workflow manager: dispatcher of tasks
 2. Endpoint faker(s): video & mobile provisioning
     > Sleep 5s and answer with 200 OK
